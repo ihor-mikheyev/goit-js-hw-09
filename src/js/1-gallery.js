@@ -72,8 +72,9 @@ const images = [
 const galleryElement = document.querySelector('.gallery');
 
 //make markup of list elements
+let markup = [];
 images.forEach(item => {
-  const markup = `<li class="gallery-item">
+  markup.push(`<li class="gallery-item">
 	<a class="gallery-link" href="${item.original}">
 		<img 
 			class="gallery-image" 
@@ -82,12 +83,11 @@ images.forEach(item => {
 			/>
 	</a>
 </li>
-`;
-
-  const li = document.createElement('li');
-  li.innerHTML = markup;
-  galleryElement.append(li);
+`);
 });
+
+// transform markup array to ul > li items
+galleryElement.insertAdjacentHTML('beforeend', markup.join(''));
 
 // init and define lightbox
 let gallery = new simpleLightbox('.gallery a', {
